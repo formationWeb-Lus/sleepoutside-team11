@@ -1,10 +1,12 @@
 // product.js
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
-
+import { getParam } from "./utils.mjs";
 // Créer une source de données pour la catégorie "tents"
 const dataSource = new ProductData("tents");
+const productId2 = getParam("product");
 
+console.log(dataSource.findProductById(productId2));
 // Fonction : ajouter un produit au panier
 export function addProductToCart(product) {
   let cartItems = getLocalStorage("so-cart");
