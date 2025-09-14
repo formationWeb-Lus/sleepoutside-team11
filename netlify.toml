@@ -1,4 +1,3 @@
 [build]
-  base = "sleepoutside-team11"
-  publish = "sleepoutside-team11/dist"
+  publish = "dist"
   command = "npm run build"
