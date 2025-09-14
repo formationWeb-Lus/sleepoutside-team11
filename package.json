@@ -1,6 +1,7 @@
 {
   "name": "wdd330",
   "version": "1.0.0",
+  "description": "Projet WDD330 Sleep Outside",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
@@ -10,5 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "vite": "^7.1.5"
+  }
 }
