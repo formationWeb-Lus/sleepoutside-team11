@@ -13,7 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "serve": "^14.2.5",
+    "serve": "^14.2.5"
+  },
+  "devDependencies": {
     "vite": "^7.1.5"
   }
 }
