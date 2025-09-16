@@ -1,13 +1,25 @@
 import ProductData from "./ProductData.mjs";
-import ProductList from "./ProductList.mjs";
-import Alerts from "./alerts.mjs";
+import Alerts from "./alerts.mjs";  // si alerts.mjs est dans src/js/
 
-// Produits
-const dataSource = new ProductData("tents");
+// --- Charger le CSS dynamiquement ---
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = import.meta.env.BASE_URL + "css/tents.css";
+document.head.appendChild(link);
+
+// --- Produits ---
+const dataSource = new ProductData(import.meta.env.BASE_URL + "json/tents.json");
 const element = document.querySelector(".product-list");
-const productList = new ProductList("Tents", dataSource, element);
-productList.init();
 
-// Alertes
-const alerts = new Alerts("./public/json/alerts.json", "#alerts");
+// On affiche simplement les produits dans la liste
+dataSource.init().then(products => {
+  products.forEach(product => {
+    const li = document.createElement('li');
+    li.textContent = product.name + " - $" + product.price;
+    element.appendChild(li);
+  });
+});
+
+// --- Alertes ---
+const alerts = new Alerts(import.meta.env.BASE_URL + "json/alerts.json", "#alerts");
 alerts.init();
