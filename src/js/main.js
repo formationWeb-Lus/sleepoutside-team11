@@ -4,7 +4,8 @@ import Alerts from "./alerts.mjs";  // si alerts.mjs est dans src/js/
 // --- Charger le CSS dynamiquement ---
 const link = document.createElement('link');
 link.rel = 'stylesheet';
-link.href = import.meta.env.BASE_URL + "css/tents.css";
+link.href = "../css/tents.css"; // ou "./css/tents.css" selon structure
+
 document.head.appendChild(link);
 
 // --- Produits ---
