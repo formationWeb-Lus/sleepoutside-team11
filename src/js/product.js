@@ -1,45 +1,63 @@
 // product.js
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-// Créer une source de données pour la catégorie "tents"
 const dataSource = new ProductData("tents");
 
-// Fonction : ajouter un produit au panier
-export function addProductToCart(product) {
+// Fonction pour afficher les détails du produit
+async function renderProductDetails() {
+  // Récupérer l'ID du produit depuis l'URL
+  const productId = new URLSearchParams(window.location.search).get("product");
+
+  const container = document.getElementById("product-details");
+  if (!productId) {
+    container.innerHTML = "<p>❌ Aucun produit sélectionné.</p>";
+    return;
+  }
+
+  // Récupérer le produit correspondant
+  const product = await dataSource.findProductById(productId);
+
+  if (!product) {
+    container.innerHTML = `<p>❌ Produit ${productId} introuvable.</p>`;
+    return;
+  }
+
+  // Générer le HTML dynamique
+  container.innerHTML = `
+    <section class="product-detail">
+      <h2>${product.Name}</h2>
+      <img src="${product.Image}" alt="${product.Name}">
+      <p>${product.Description}</p>
+      <p><strong>${product.FinalPrice} €</strong></p>
+      <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+    </section>
+  `;
+
+  // Attacher l’événement du bouton
+  const btn = document.getElementById("addToCart");
+  btn.addEventListener("click", () => addProductToCart(product));
+}
+
+// Fonction pour ajouter le produit au panier
+function addProductToCart(product) {
   let cartItems = getLocalStorage("so-cart");
 
-  // ✅ Forcer à être un tableau pour éviter l’erreur "find is not a function"
   if (!Array.isArray(cartItems)) {
     cartItems = [];
   }
 
-  // Vérifie si le produit existe déjà dans le panier
-  const existingItem = cartItems.find((item) => item.Id === product.Id);
-
+  const existingItem = cartItems.find(item => item.Id === product.Id);
   if (existingItem) {
-    // Si déjà présent, on incrémente la quantité
     existingItem.quantity = (existingItem.quantity || 1) + 1;
   } else {
-    // Sinon on ajoute le produit avec une quantité de 1
     product.quantity = 1;
     cartItems.push(product);
   }
 
-  // Sauvegarde du panier
   setLocalStorage("so-cart", cartItems);
-  alert(`${product.Name} added to cart !`);
+  alert(`${product.Name} ajouté au panier ✅`);
 }
 
-// Gestionnaire du clic sur "Add to Cart"
-async function addToCartHandler(e) {
-  const productId = e.target.dataset.id; // ID récupéré depuis l'attribut data-id
-  const product = await dataSource.findProductById(productId);
-
-  addProductToCart(product);
-}
-
-// Ajouter l’écouteur d’événement au bouton
-document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+// Lancer le rendu du produit
+renderProductDetails();
