@@ -177,10 +177,16 @@ button {
   max-width: 250px;
 }
 
-.product-card h2,
-.product-card h3,
+
 .product-card p {
   margin: 0.5em 0;
+  color: red;
+}
+
+.product-card h2,
+.product-card h3{
+  color: rgb(41, 38, 224);
+  font-optical-sizing: auto;
 }
 
 .card__brand {
@@ -245,6 +251,7 @@ button {
   body {
     max-width: 1080px;
     margin: auto;
+    
   }
 
   .mission {
@@ -261,3 +268,4 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+

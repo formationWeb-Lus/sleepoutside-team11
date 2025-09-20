@@ -38,3 +38,16 @@ export function renderListWithTemplate(template, parentElement, list, position =
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+export function loadHeaderFooter() {
+  const header = document.getElementById("main-header");
+  const footer = document.getElementById("main-footer");
+
+  if (header) {
+    header.innerHTML = `<h1>Sleep Outside</h1>`; // ou ton HTML réel
+  }
+
+  if (footer) {
+    footer.innerHTML = `<p>© 2025 Sleep Outside</p>`; // ou ton HTML réel
+  }
+}

@@ -1,21 +1,19 @@
-// product.js
 import ProductData from "./ProductData.mjs";
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-const dataSource = new ProductData("tents");
+// Pas besoin de passer "tents" dans le constructeur
+const dataSource = new ProductData();
 
 // Fonction pour afficher les détails du produit
 async function renderProductDetails() {
-  // Récupérer l'ID du produit depuis l'URL
   const productId = new URLSearchParams(window.location.search).get("product");
-
   const container = document.getElementById("product-details");
+
   if (!productId) {
     container.innerHTML = "<p>❌ Aucun produit sélectionné.</p>";
     return;
   }
 
-  // Récupérer le produit correspondant
   const product = await dataSource.findProductById(productId);
 
   if (!product) {
@@ -23,7 +21,7 @@ async function renderProductDetails() {
     return;
   }
 
-  // Générer le HTML dynamique
+  // Génération HTML
   container.innerHTML = `
     <section class="product-detail">
       <h2>${product.Name}</h2>
@@ -34,12 +32,12 @@ async function renderProductDetails() {
     </section>
   `;
 
-  // Attacher l’événement du bouton
+  // Événement bouton
   const btn = document.getElementById("addToCart");
   btn.addEventListener("click", () => addProductToCart(product));
 }
 
-// Fonction pour ajouter le produit au panier
+// Ajouter au panier
 function addProductToCart(product) {
   let cartItems = getLocalStorage("so-cart");
 
@@ -59,5 +57,5 @@ function addProductToCart(product) {
   alert(`${product.Name} ajouté au panier ✅`);
 }
 
-// Lancer le rendu du produit
+// Démarrer
 renderProductDetails();
