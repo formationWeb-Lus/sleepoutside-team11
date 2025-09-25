@@ -2,10 +2,9 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  root: "src", // dossier source de Vite
-
+  root: "src",
   build: {
-    outDir: "../dist", // build final à la racine dans dist
+    outDir: "dist", // plus de ../
     rollupOptions: {
       input: {
         main: resolve(__dirname, "src/index.html"),
