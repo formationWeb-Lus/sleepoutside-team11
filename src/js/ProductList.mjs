@@ -19,20 +19,25 @@ export default class ProductList {
   }
 
   renderList(list) {
-    this.listElement.innerHTML = "";
-    list.forEach(product => {
-      const li = document.createElement("li");
-      li.classList.add("product-card");
+  this.listElement.innerHTML = "";
+  list.forEach(product => {
+    if (!product || !product.Images || !product.Images.PrimaryMedium) {
+      console.warn("Produit manquant ou sans image :", product);
+      return; // ignore ce produit
+    }
 
-      li.innerHTML = `
-        <a href="../product_pages/index.html?product=${product.Id}">
-          <img src="${product.Images.PrimaryMedium}" alt="${product.Name}" />
-          <h3>${product.Name}</h3>
-          <p class="price">$${product.FinalPrice}</p>
-        </a>
-      `;
+    const li = document.createElement("li");
+    li.classList.add("product-card");
 
-      this.listElement.appendChild(li);
-    });
-  }
+    li.innerHTML = `
+      <a href="../product_pages/index.html?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium || 'assets/default-product.jpg'}" alt="${product.Name}" />
+        <h3>${product.Name}</h3>
+        <p class="price">$${product.FinalPrice}</p>
+      </a>
+    `;
+
+    this.listElement.appendChild(li);
+  });
+}
 }
