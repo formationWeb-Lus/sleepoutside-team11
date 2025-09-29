@@ -4,12 +4,104 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sleep Outside | Home</title>
+  <!-- CSS externe -->
   <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- CSS interne (optionnel, peut compléter style.css) -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .hero {
+      position: relative;
+      text-align: center;
+    }
+
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #fff;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .highlight {
+      color: #ff9800;
+    }
+
+    .mission {
+      padding: 1rem;
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      max-width: 600px;
+      margin: -100px auto 2rem auto;
+      border-radius: 10px;
+    }
+
+    .products {
+      padding: 2rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .product-grid li {
+      background-color: #fff;
+      border-radius: 10px;
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .product-grid li:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .product-grid img {
+      max-width: 100px;
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-grid h2 {
+      font-size: 1.2rem;
+      margin: 0.5rem 0 0 0;
+      color: #333;
+    }
+  </style>
+
   <script src="./js/main.js" type="module"></script>
 </head>
 
 <body>
-  <header class="divider" id="main-header"></header>
+  <header class="divider" id="main-header">Sleep Outside</header>
   <main class="divider">
     <div class="hero">
       <img src="/images/banner-sm.jpg" srcset="images/banner-sm.jpg 500w, images/banner.jpg" alt="image of a high mountain lake" />
@@ -51,6 +143,6 @@
       </ul>
     </section>
   </main>
-  <footer id="main-footer"></footer>
+  <footer id="main-footer">© 2025 Sleep Outside</footer>
 </body>
 </html>
