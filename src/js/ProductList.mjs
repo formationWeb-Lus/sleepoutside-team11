@@ -1,5 +1,17 @@
-// src/js/ProductList.mjs
 import { renderListWithTemplate } from "./utils.mjs";
+
+function productCardTemplate(product) {
+  return `
+    <li class="product-card">
+      <a href="/product_pages/?product=${product.Id}">
+        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
+        <h3>${product.Brand.Name}</h3>
+        <p>${product.NameWithoutBrand}</p>
+        <p class="product-card__price">$${product.FinalPrice}</p>
+      </a>
+    </li>
+    `;
+}
 
 export default class ProductList {
   constructor(category, dataSource, listElement) {
@@ -9,35 +21,18 @@ export default class ProductList {
   }
 
   async init() {
-    try {
-      const list = await this.dataSource.getData(this.category);
-      this.renderList(list);
-    } catch (err) {
-      console.error("Erreur chargement produits:", err.message);
-      this.listElement.innerHTML = `<li>Erreur chargement produits: ${err.message}</li>`;
-    }
+    const list = await this.dataSource.getData(this.category);
+    this.renderList(list);
+    document.querySelector(".title").textContent = this.category;
   }
 
   renderList(list) {
-  this.listElement.innerHTML = "";
-  list.forEach(product => {
-    if (!product || !product.Images || !product.Images.PrimaryMedium) {
-      console.warn("Produit manquant ou sans image :", product);
-      return; // ignore ce produit
-    }
+    // const htmlStrings = list.map(productCardTemplate);
+    // this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
 
-    const li = document.createElement("li");
-    li.classList.add("product-card");
+    // apply use new utility function instead of the commented code above
+    renderListWithTemplate(productCardTemplate, this.listElement, list);
 
-    li.innerHTML = `
-      <a href="../product_pages/index.html?product=${product.Id}">
-        <img src="${product.Images.PrimaryMedium || 'assets/default-product.jpg'}" alt="${product.Name}" />
-        <h3>${product.Name}</h3>
-        <p class="price">$${product.FinalPrice}</p>
-      </a>
-    `;
+  }
 
-    this.listElement.appendChild(li);
-  });
-}
 }
