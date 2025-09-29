@@ -9,9 +9,9 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         // Supprime ou commente les lignes si les fichiers n'existent pas
-        // cart: resolve(__dirname, "src/cart/index.html"),
-        // checkout: resolve(__dirname, "src/checkout/index.html"),
-        // product_listing: resolve(__dirname, "src/product_listing/index.html"),
+         cart: resolve(__dirname, "src/cart/index.html"),
+         checkout: resolve(__dirname, "src/checkout/index.html"),
+         product_listing: resolve(__dirname, "src/product_listing/index.html"),
       },
     },
   },
