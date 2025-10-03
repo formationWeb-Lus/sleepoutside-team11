@@ -1,0 +1,52 @@
+/* Page de succès */
+.success-page {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.success-page h2 {
+  color: #28a745; /* Vert succès */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.success-page p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.success-page a {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.success-page a:hover {
+  background: #0056b3;
+}
+
+/* Mobile friendly */
+@media (max-width: 600px) {
+  .success-page {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+
+  .success-page h2 {
+    font-size: 1.5rem;
+  }
+
+  .success-page p {
+    font-size: 1rem;
+  }
+}

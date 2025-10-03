@@ -1,0 +1,81 @@
+/* Style général */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f9;
+  color: #333;
+}
+
+/* En-tête et pied de page */
+header, footer {
+  background: #222;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Titre */
+main h2 {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+/* Formulaire */
+.checkout-form {
+  max-width: 600px;
+  margin: auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+fieldset {
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+legend {
+  font-weight: bold;
+  padding: 0 0.5rem;
+}
+
+label {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Bouton */
+button#checkoutSubmit {
+  display: block;
+  width: 100%;
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button#checkoutSubmit:hover {
+  background: #218838;
+}
+
+/* Order summary */
+.order__summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}

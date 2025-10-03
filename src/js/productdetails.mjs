@@ -1,7 +1,6 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 export default class ProductDetails {
-
   constructor(productId, dataSource) {
     this.productId = productId;
     this.product = {};
@@ -10,6 +9,8 @@ export default class ProductDetails {
   }
 
   async init() {
+    if (!this.container) return console.error("Container #product-details introuvable");
+
     if (!this.productId) {
       this.container.innerHTML = "<p>❌ Aucun produit sélectionné.</p>";
       return;
@@ -31,15 +32,24 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
-    cartItems.push(this.product);
+    const existing = cartItems.find(item => item.Id === this.product.Id);
+
+    if (existing) {
+      existing.Quantity = (existing.Quantity || 1) + 1;
+    } else {
+      this.product.Quantity = 1;
+      cartItems.push(this.product);
+    }
+
     setLocalStorage("so-cart", cartItems);
-    alert(`${this.product.Name || 'Produit'} ajouté au panier ✅`);
+
+    // ✅ Redirection vers checkout/index.html après ajout au panier
+    window.location.href = "../checkout/index.html";
   }
 
   renderProductDetails() {
     const product = this.product;
 
-    // fallback pour images et autres propriétés
     const imgSrc = product?.Images?.PrimaryExtraLarge || 'assets/default-product.jpg';
     const brand = product?.Brand?.Name || 'Marque inconnue';
     const name = product?.NameWithoutBrand || product?.Name || 'Produit sans nom';
@@ -48,13 +58,12 @@ export default class ProductDetails {
     const description = product?.DescriptionHtmlSimple || 'Description indisponible';
 
     this.container.innerHTML = `
-      <h2>${product.Category ? product.Category.charAt(0).toUpperCase() + product.Category.slice(1) : 'Catégorie inconnue'}</h2>
-      <p id="p-brand">${brand}</p>
-      <p id="p-name">${name}</p>
-      <img id="p-image" src="${imgSrc}" alt="${name}">
-      <p id="p-price">${new Intl.NumberFormat('de-DE', {style: 'currency', currency: 'EUR'}).format(price * 0.85)}</p>
-      <p id="p-color">${color}</p>
-      <div id="p-description">${description}</div>
+      <h3>${brand}</h3>
+      <h2>${name}</h2>
+      <img src="${imgSrc}" alt="${name}" />
+      <p class="product-price">$${price}</p>
+      <p class="product-color">${color}</p>
+      <p class="product-description">${description}</p>
       <button id="add-to-cart" data-id="${product.Id}">Add to Cart</button>
     `;
   }
