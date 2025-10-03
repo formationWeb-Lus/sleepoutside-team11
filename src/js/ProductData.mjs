@@ -1,8 +1,9 @@
 // ProductData.mjs
 
+// Utilise la variable d'environnement VITE_SERVER_URL ou une valeur par défaut
 // Assurez-vous que VITE_SERVER_URL est défini dans votre .env
 // Exemple: VITE_SERVER_URL=https://wdd330-backend.onrender.com/
-const baseURL = import.meta.env.VITE_SERVER_URL;
+const baseURL = import.meta.env.VITE_SERVER_URL || "https://wdd330-backend.onrender.com";
 
 /**
  * Convertit la réponse fetch en JSON ou lève une erreur si le statut n'est pas OK
